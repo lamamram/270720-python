@@ -140,7 +140,7 @@ print(nb_hr, "h", nb_min, "m", nb_sec, "s")
 # print(tmp.format(nb_hour, nb_min, nb_sec))
 
 ## version 2 avec f-string
-print(f"il est {nb_hr}h, {nb_min}m, {nb_sec}s")
+print(f"il est {nb_hr:02d}h, {nb_min:02d}m, {nb_sec:02d}s")
 
 # %%
 ## attention avec la mémoire de la console ipython de jupyter !!
