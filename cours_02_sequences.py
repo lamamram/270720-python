@@ -5,14 +5,15 @@ prenom = "john"
 nom = "doe"
 
 # afficher nom complet: "john doe"
-
+nom_complet = prenom + " " + nom
+print(nom_complet)
 
 # %% ---------- chaines de caractères: pas de conversion implicite en python ---------------
 
 nb = 2
 
-print(nb + " inséparables")
-
+# print(nb + " inséparables") #TypeError: unsupported operand type(s) for +: 'int' and 'str'
+print(str(nb) + " inséparables") # conversion explicite
 # %% ---------- fonctions internes d'une variable selon son type : ici str ----
 
 ######### forme type <variable>.<fonction>()
@@ -21,16 +22,21 @@ prenom = "john"
 nom = "doe"
 
 # afficher le nom complet : John DOE
+nom_complet = prenom.capitalize() + " " + nom.upper()
+print(nom_complet)
 
 # %% ------------ indéxer une séquence ------------------------------------
 nom_complet = "Joe DOE"
 
 # prendre la longueur d'une str
+length = len(nom_complet)
 
 ######## <variable>[n]: caractère de la variable à la position n 
-
 # afficher le 1er caractère de la str, le 1er car. du 2ème mot, le dernier car.
-
+print(f"1er car. de la str: {nom_complet[0]}")
+print(f"1er car. du 2ème mot: {nom_complet[4]}")
+print(f"dernier car. de la str à partir de 0: {nom_complet[length-1]}")
+print(f"dernier car. de la str à partir de la fin: {nom_complet[-1]}")
 
 # %% ------------- SLICING d'une séquence ----------------------------------- 
 
@@ -38,43 +44,62 @@ civilite_nom_complet = "Mr. Joe DOE"
 
 ######## slicing : <variable>[<index de début compris>:<index de fin non compris>]
 ######## slicing avec pas: <var>[deb:fin:pas]
-
 # afficher la civilité, le prénom, le nom à partir de civilite_nom_complet
+civilite = civilite_nom_complet[0:3]
+prenom = civilite_nom_complet[4:7]
+nom = civilite_nom_complet[8:11]
 
 # si début => 0 ou rien, fin => rien longueur -1 ou compter depuis la fin ...
+civilite = civilite_nom_complet[:3]
+nom = civilite_nom_complet[8:]
 
 # afficher une chaine contenant chaque 1er car. de chaque mot //
+lettres_with_4step = civilite_nom_complet[::4]
 
 # retourner civilite_nom_complet
+redrum = civilite_nom_complet[::-1]
 
 
 # %% -------------- retourner l'indice d'une str ---------------------------
 
 civilite_nom_complet = "Mr. Joe DOE"
 
+index_J = civilite_nom_complet.index("J")
+index_D = civilite_nom_complet.index("D")
+
 # afficher la civilité, le prénom, le nom à partir des indices de J et D
+civilite = civilite_nom_complet[:index_J-1]
+prenom = civilite_nom_complet[index_J:index_D-1]
+nom = civilite_nom_complet[index_D:]
 
 # même chose mais en remettant les valeurs slicées en minuscules
-
+      #<--------  str ------------->: donc on peut utiliser lower() sur le résultat du slicing
+nom = civilite_nom_complet[index_D:].lower()
+      #<--------  str ---------- >: donc on peut utiliser [] sur le résultat en minuscules
+nom = civilite_nom_complet.lower()[index_D:]
 
 # %% -------------- list: indexation, concaténation, slicing -------------
 
 mots = ["appeler", "un", "chat"]
 
 # afficher chat à partir de mots
+print(mots[2])
 
 # modifier mots en concaténant ["il", "faut"] , mots et ["un", "chat"]
+mots = ["il", "faut"] + mots + ["un", "chat"]
 
 # remettre mots dans sa valeur initiale à partir de sa valeur courante
+print(mots[2:5])
 
 # %% -------------- transformation de liste <=> chaîne de caractères ----------
 
 civilite_nom_complet = "Mr. Joe DOE"
 
 # créer la liste mots, des mots de civilite_nom_complet => split
-
+mots = civilite_nom_complet.split()
 # recréer civilite_nom_complet à partir de mots
-# en soudant les élements de mots avec un " " => join
+# une valeur litérale de type str a des fonctions internes de str
+civilite_nom_complet = " ".join(mots)
 
 # %% ---------------- fonctions internes exclusives aux listes -----------------
 mots = ["appeler", "un"]
