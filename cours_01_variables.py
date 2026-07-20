@@ -38,38 +38,49 @@ rien = None # rien                (type NoneType)
 x = 10
 
 ## incrémenter x: ajouter 1 à x et réaffecter x avec cet ajout
+# évaluation de l'expression x + 1
+# ensuite réaffection x = ...
+x = x + 1
 ## ASTUCE: opérateur d'incrémentation
-
+x += 1 # -= *= /=, ....
 print("créer y avec 5 et z avec la soustraction de x entre y")
 
+y = 5
+z = y - x
 
 ## différentes façons d'afficher la valeur 7 !
 ## valeur litérale, variable, EXPRESSION
-
+print(   7,         z,        y - x)
 
 # %% ------------- fonctions globales entrée / sortie ----------------------
 ## input(invite): saisir un âge et un prénom à partir du clavier 
 ##        : et RETOURNER la valeur saisie
 ## voir la documentation def input(...) -> ...
-
+age = input("saisir un âge: ")
 
 ## type(obj): voir le type de l'âge
-
+print(type(age))
 #
 # int(): conversion en entier
 ## REM: il y a une fonction de conversion pour chaque type de donnée 
-
+age = int(age)
 
 ## créer une variable user qui contient à la fois le prénom et l'âge
-
+prenom = input("saisir un prénom: ")
+user = {"prenom": prenom, "age": age}
+print(user)
 
 # %% ---------- jongler avec les expressions ---------------
 ## sasiur un entier au clavier et afficher la valeur ajoutée de 2
 ## on peut décomposer en plusieurs étapes
 
+# nb = int(input("saisir un bombre: "))
+# nb = float(nb)
+# nb += 2
+# print(nb)
 
 ## ou en une seule ligne : mais c'est moins lisible et controlable
-
+print(float(input("saisir un entier: ")) + 2)
 
 # %% ------------ unpacking ----------------------
 
@@ -92,17 +103,31 @@ print(v, w)
 ## REM. python est un langage haut niveau => on ne manipule pas directement la mémoire
 ## l'interpréteur gère l'allocation des variables avec un indentifiant unique (id)
 x = 10
-print(id(x))  
+print(id(x))
 
+# passage en référence: x et y sont 2 étiquettes qui pointent vers le même objet en mémoire
+y = x
+
+print(id(x), id(y), x is y)
+z = 10
+print(x is z)
+
+y += 1
+print(x is y, id(y))
 
 # %% ---------- MINI-EXO: opérateurs arithmétiques -------------------------
 # 1. saisir un entier au clavier => compris entre 0 et 86400 (nb de secondes dans une journée)
-
 # 2. convertir la sortie précédente en entier
+# moche car pas de contrôle de type
+nb_sec = int(input("saisir un entier compris entre 0 et 86400: "))
 
 # 3. décomposer ce nombre en nb en heure, minutes, secondes
-# 4. affichier le résulat <nb_hour>h <nb_min>m <nb_sec>
-
+nb_hr = nb_sec // 3600
+nb_min = (nb_sec % 3600) // 60
+# nb_sec = nb_sec % 60
+nb_sec %= 60
+# 4. afficher le résulat <nb_hour>h <nb_min>m <nb_sec>
+print(nb_hr, "h", nb_min, "m", nb_sec, "s")
 
 # %% ------------------- même affichage mas en formatant mieux ---------------
 
@@ -115,6 +140,14 @@ print(id(x))
 # print(tmp.format(nb_hour, nb_min, nb_sec))
 
 ## version 2 avec f-string
+print(f"il est {nb_hr}h, {nb_min}m, {nb_sec}s")
 
+# %%
+## attention avec la mémoire de la console ipython de jupyter !!
 
+x = 10
+
+# %%
+x += 1
+print(x)
 # %%
