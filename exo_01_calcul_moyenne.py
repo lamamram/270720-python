@@ -11,8 +11,27 @@ Hint: pour vérifier une valeur : regarder les valeurs internes de la valeur en 
 """
 
 # %% --------------------- solution n°1 ------------------------
+saisie = input('saisir n valeurs entiers relatifs au le clavier séparées par ","')
+print(saisie)
+valeurs = saisie.split(",")
 
+# ex = "-56"
+# print(ex.isnumeric())
+integers = []
+for valeur in valeurs:
+    ## strip: dégage les espaces à gauche et à droite
+    valeur  = valeur.strip()
+    # ---- cas positif --- OU ----- cas négatif: commence avec "-" ET le reste est numérique
+#    if valeur.isnumeric() or (valeur[0] == "-" and valeur[1:].isnumeric()):
+                             # startswith est faux si la str est vide
+                             # si valeur == "-" alots la slice en dehors de l'intervalle de la valeur ne plante pas mais est faux: valeur[1:]
+    if valeur.isnumeric() or (valeur.startswith("-") and valeur[1:].isnumeric()):
+        integers.append(int(valeur))
 
+## moyenne arithmétique: somme (des éléments) / le nb d'éléments
+if len(integers):
+    average = sum(integers) / len(integers)
+    print(f"moyenne de {integers}: { round(average, 2) }")
 
 # %% ------------------------- solution n°2 avec break et else -----------------
 ## on sort dès la première erreur rencontrée, on ne veut pas voir toutes les erreurs
