@@ -1,12 +1,13 @@
 # %%
 """
-1/ saisir n valeurs entiers relatifs dans le clavier séparés par ","
+1/ saisir n valeurs entiers relatifs au le clavier séparées par ","
 2/ on veut itérer sur les valeurs saisies pour vérifier
 que ces valeurs sont des entiers relatifs (1er cas entier naturel => une str qui ne contient que des caractères numérique, ensuite 2ème cas négatif)
+Hint: pour vérifier une valeur : regarder les valeurs internes de la valeur en question
 3/ si c'est convertible on ajoute la valeur convertie dans une liste
 3b/ si ce n'est pas convertible => "casser la boucle"
 4/ calculer la moyenne depuis la liste
-5/ présenter le résultat avec 2 chiffres sign.  
+5/ présenter le résultat avec 2 décimales.  (pas de formatage ==> vrai arrondi)
 """
 
 # %% --------------------- solution n°1 ------------------------
