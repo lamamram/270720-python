@@ -119,11 +119,20 @@ for lettre in nom_complet:
 # %% --------- générer une "série d'entiers" avec range() -------------------------
 # pour i dans une range de 5 entiers depuis 0: afficher i
 
+for i in range(5):
+    print(i)
+
 print("-"*20)
+
+for i in range(2, 5):
+    print(i)
 
 # pour i dans une range entre 2 et 5: afficher i
 
 print("-"*20)
+
+for i in range(5, -1, -1):  
+    print(i)
 
 # pour i dans une range de 5 jusqu'à 0: afficher i
 
@@ -185,19 +194,42 @@ print([ fruit.upper() for fruit in fruits if fruit.startswith("p") ])
 ## prendre une range 5 pour afficher i et on s'arrête à 3
 print("-"*10 + "break" + "-"*10)
 
+for i in range(5):
+    if i == 3:
+        break
+    print(i)
+
 ## prendre une range 5 pour afficher i, sans afficher 3
 print("-"*10 + "continue" + "-"*10)
+
+for i in range(5):
+    if i == 3:
+        continue
+    print(i)
 
 ## saisir j par le clavier. prendre une range 5 pour afficher i
 ## dans la boucle, casser la boucle si i==j
 ## en sortant de la boucle, tester si la boucle est sortie à cause du break ou non 
 print("-"*10 + "else après for" + "-"*10)
 
-
+j = int(input("saisir un entier: "))
+for i in range(5):
+    if i == j:
+        break
+    print(i)
+else:
+    print(f"la boucle est sortie normalement / pas de break, j={j} n'a pas été trouvé dans la range(5)")
 
 # %% boucle while : tant qu'une condition est vraie: le bloc est exécutée
 temp = int(input("saisir une temperature en °C: "))
 
+
+while temp < 100:
+    print(f"température: {temp}°C")
+    temp -= 10
+    if temp < 25:
+        temp = int(input("saisir une temperature en °C: "))
+print("boom")
 # tant que la temp est sous 100°C: 
 #     on roule donc on perd 10°C
 #     afficher la temp
@@ -211,3 +243,12 @@ temp = int(input("saisir une temperature en °C: "))
 # %% --------------- boucle infinie: condition toujours vraie --------------------------
 ## idem avec une boucle infinie
 temp = int(input("saisir une temperature en °C: "))
+
+while True:
+    if temp >= 100:
+        break
+    print(f"température: {temp}°C")
+    temp -= 10
+    if temp < 25:
+        temp = int(input("saisir une temperature en °C: "))
+print("boom")
