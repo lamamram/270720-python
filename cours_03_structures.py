@@ -55,9 +55,16 @@ print(message)
 ## prendre un int. savoir si l'entier est négatif ou nul
 x = int(input("saisir un entier: "))
 
-
+if x <= 0:
+    print("négatif")
 ## savoir çà ET si c'est impair (idem en remplaçant ET par OU)
 
+if x <= 0 and x % 2 == 1:
+    print("négatif et impair")
+
+## x % 2 vaut 1 s'il est impair ET 1 vaut True dans un if!
+if x <= 0 and x % 2:
+    print("négatif et impair")
 
 
 # %% --------------- valeur fausses des built-ins et négation --------------
@@ -88,6 +95,10 @@ mots = ["appeler", "un", "chat"]
 # pour mot dans mots: 
 #     afficher mot
 
+## REM: mot est une variable "locale" ET ARBITRAIRE à la boucle qui est 
+## initialisée à chaque itération: 1° mot=appeler, 2° mot=un, 3° mot=chat, pas de 4° car la liste est consommée
+for mot in mots:
+    print(mot)
 
 print("-"*20)
 
@@ -95,6 +106,10 @@ nom_complet = "John DOE"
 # pour lettre dans nom_complet:
 #    afficher lettre 
 
+## REM: for + if ==> filtre
+for lettre in nom_complet:
+    if lettre.lower() in "aeiouy":
+        print(lettre)
 
 
 # %% --------- générer une "série d'entiers" avec range() -------------------------
