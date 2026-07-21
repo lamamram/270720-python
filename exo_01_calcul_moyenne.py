@@ -12,7 +12,6 @@ Hint: pour vérifier une valeur : regarder les valeurs internes de la valeur en 
 
 # %% --------------------- solution n°1 ------------------------
 saisie = input('saisir n valeurs entiers relatifs au le clavier séparées par ","')
-print(saisie)
 valeurs = saisie.split(",")
 
 # ex = "-56"
@@ -24,7 +23,7 @@ for valeur in valeurs:
     # ---- cas positif --- OU ----- cas négatif: commence avec "-" ET le reste est numérique
 #    if valeur.isnumeric() or (valeur[0] == "-" and valeur[1:].isnumeric()):
                              # startswith est faux si la str est vide
-                             # si valeur == "-" alots la slice en dehors de l'intervalle de la valeur ne plante pas mais est faux: valeur[1:]
+                             # si valeur == "-" alors la slice en dehors de l'intervalle de la valeur ne plante pas mais est faux: valeur[1:]
     if valeur.isnumeric() or (valeur.startswith("-") and valeur[1:].isnumeric()):
         integers.append(int(valeur))
 
