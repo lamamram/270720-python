@@ -131,18 +131,54 @@ print("-"*20)
 
 fruits = ["pomme", "poire", "framboise"]
 
+fruits_maj = []
+for fruit in fruits:
+    fruits_maj.append(fruit.upper())
+print(fruits_maj)
+
 # afficher une liste des fruits en majuscule sans modifier fruits
 
 
 # %% ----------- idem en modifiant directement de la liste d'origine --------
 fruits = ["pomme", "poire", "framboise"]
+        # génère qqch proche à [0,1,2]
+for i in range(len(fruits)):
+    # fruits[0] = fruits[0].upper()
+    # ...
+    # fruits[2] = fruits[2].upper()
+    fruits[i] = fruits[i].upper()
+print(fruits)
 
 # %% -------------- idem avec la fonction - enumerate() -------------------
 fruits = ["pomme", "poire", "framboise"]
 
 ## enumerate transforme la liste en liste de tuple (index, valeur)
-## itérer à la fois avec les indices et les valeurs dans la boucle
+enum = enumerate(fruits)
+print(f"objet enumerate: {enum}")
+print(f"convertie en list: {list(enum)}")
 
+## itérer à la fois avec les indices et les valeurs dans la boucle
+## ce for utiiser l'unpacking des tuples d'enumerate
+for i, fruit in enumerate(fruits):
+    ## les valeurs de fruits[i] et fruit sont identiques
+    ## les ids de  //               //   sont différentes 
+    fruits[i] = fruit.upper()
+
+print(fruits)
+
+## utilisation classique d'enumerate: AVEC LES FICHIERS !!!
+
+# %% ---------------------  listes en intension ----------------
+## intension: créer un objet à partir de règles de construction à la place de données litérales
+# [ je veux créer une liste de fruit en majuscule pour fruit dans la liste fruits ]
+
+fruits = ["pomme", "poire", "framboise"]
+
+print([ fruit.upper() for fruit in fruits ])
+
+# [ // si le fruit commence par 'p' ]
+#       expression    for     //          if         (and)  (or)
+print([ fruit.upper() for fruit in fruits if fruit.startswith("p") ])
 
 
 # %% --- interrompre l'exécution d'une boucle : break, continue, else ---

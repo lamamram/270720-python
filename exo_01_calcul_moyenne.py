@@ -34,7 +34,21 @@ if len(integers):
 
 # %% ------------------------- solution n°2 avec break et else -----------------
 ## on sort dès la première erreur rencontrée, on ne veut pas voir toutes les erreurs
+saisie = input('saisir n valeurs entiers relatifs au le clavier séparées par ","')
+valeurs = saisie.split(",")
 
+integers = []
+for valeur in valeurs:
+    valeur  = valeur.strip()
+    if valeur.isnumeric() or (valeur.startswith("-") and valeur[1:].isnumeric()):
+        integers.append(int(valeur))
+    else:
+        print(f"{valeur} non convertible en int !")
+        break
+else:
+    if len(integers):
+        average = sum(integers) / len(integers)
+        print(f"moyenne de {integers}: { round(average, 2) }")
 
 
 # %% ----------- solution n°3: on veut voir toutes les erreurs ------------
