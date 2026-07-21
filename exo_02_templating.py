@@ -24,7 +24,28 @@ injections = {
 }
 
 # %%
+## 1/ chercher une structure évidente pour une bloucle for
+##  1a/ itération sur le dico mais que faire des slots non remplacés
+## 2/ si on selectionne le while
+##  2a/ faire un remplacement sans boucle
+##  2b/ observer qui a changé ==> indice d'une condition while
+##  2c/ encapsuler le cas particulier par le while
 
+while "((" in _template:
+    index_start = _template.index("((") + 2
+    index_end = _template.index("))")
+    key = _template[index_start:index_end]
+
+    value = injections.get(key, "N/A")
+    _template = _template.replace("((" + key + "))", str(value))
+
+print(_template)
+
+
+# %%
+# for k, v in injections.items():
+#     _template = _template.replace("((" + k + "))", str(v))
+# print(_template)
 
 
 # %% --------------------- portage en fonction ----------------------
