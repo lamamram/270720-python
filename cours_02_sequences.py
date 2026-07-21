@@ -107,57 +107,65 @@ mots = ["appeler", "un"]
 
 # ajouter "chat" à droite avec [] ou autrement
 # mots[2] = "chat" # [] : IndexError
+# mots = mots + ["chat"]
+# mots += ["chat"]
+
+# append ne retourne RIEN ( -> None) MAIS agit DIRECTEMENT sur mots
+mots.append("chat")
 
 print(mots)
 
 # concaténer ["chat", "un", "chat", "gris"] à droite avec une fonction non +
-
+mots.extend(["chat", "un", "chat", "gris"])
 print(mots)
 
 
 # ajouter "il" à gauche
-
+mots.insert(0, "Il")
 print(mots)
 
 # ajouter "faut" à gauche d'"appeler"
-
+mots.insert(mots.index("appeler"), "faut")
 print(mots)
 
-# supprimer le dernier élement de mots et retourne sa valeur
-
+# supprimer le dernier élement de mots ET retourne sa valeur
+last_inserted_first_out = mots.pop()
 print(mots)
 
 # supprimer le premier élément //
-
+# mots.pop(0)
 
 # supprimer la 1ère occurence de chat 
-
+mots.remove("chat")
 print(mots)
 
 # %% --------------- listes et tuples / str : mutabilité et immutabilité ------------
 mots = ["nommer", "un", "chien"]
 
 ## remplacer "chien" en "chat" dans mots avec []
+mots[2] = "chat"
 ## TRANSFORMATION MUABLE ==> CHANGEMENT PARTIEL DIRECT (ex. append ne retourne pas mais change)
 
 
 ## même chose avec un tuple
 mots = tuple(mots)
-
 ## remplacer "nommer" en "appeler" dans mots
+# mots[0] = "appeler" # ERROR
 
 ## transformer mots en une str phrase et mettre le 1er car. en majuscule
-
+phrase = " ".join(mots)
+# phrase[0] = "N" # ERROR
 
 ## TRANSFORMATION IMMUABLE ==> REAFFECTATION COMPLETE (capitalize retourne mais ne change pas phrase)
-
+phrase = phrase.capitalize()
 # %% --------------- opérateur in : test d'appartenance -----------------------
 
 phrase = "appeler un chat"
 
 # savoir si "chat" est dans phrase
-
+"chat" in phrase
 # savoir si "chien" n'est pas dans phrase
-
+"chien" not in phrase
 # idem en transformant phrase en mots
-
+mots = phrase.split()
+"chat" in mots
