@@ -5,10 +5,36 @@ overdraft = 200
 amount = input("Entrez un montant : ")
 amount = int(amount)
 
+if amount < 0:
+    print(f"Transaction refusée: {amount} négatif")
+elif amount >= balance + overdraft:
+    print(f"Transaction refusée: {amount} fonds insuffisants")
+else:
+    balance -= amount
+    print(f"retrait accepté: solde: {amount}")
+
 # si le montant est négatif => afficher "Transaction refusée: {montant} négatif"
 # sinon mais si le montant trop important => "Transaction refusée: {montant} fonds insuffisants" 
 # sinon => le retrait est effectué et "Transaction acceptée"
 
+## idem avec la logique inverse !!
+# if amount >= 0:
+#     if amount <= balance + overdraft:
+#         balance -= amount
+#         print(f"retrait accepté: solde: {amount}")
+#     else:
+#         print(f"Transaction refusée: {amount} fonds insuffisants")
+# else:
+#     print(f"Transaction refusée: {amount} négatif")
+
+# avec opérateur logique
+# if amount >= 0 and amount <= balance + overdraft:
+#     balance -= amount
+#     print(f"retrait accepté: solde: {amount}")
+# elif amount < 0:
+#     print(f"Transaction refusée: {amount} négatif")
+# else:
+#     print(f"Transaction refusée: {amount} fonds insuffisants")
 
 
 # %% ----------------- opérateur ternaire ---------------------------------
