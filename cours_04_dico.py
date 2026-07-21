@@ -100,20 +100,22 @@ print(dict(z))
 fruits = {"pomme", "poire", "banane"}
 
 # tester si les sets sont indexables
-# fruits[0]: Error: 'set' object is not subscriptable
+# fruits[0] # Error: 'set' object is not subscriptable
 
 # tester si un élément est dans un set
-"coing" in fruits
+print(f"coing dans {fruits}: { "coing" in fruits }")
+
 # ajouter un élément à un set
-
 fruits.add("coing")
-fruits.add("coing")  # ne fait rien si l'élément est déjà dans le set
-# supprimer un élément d'un set + erreur si l'élément n'existe pas
+print(f"maintenant coing dans {fruits}: { "coing" in fruits }")
 
+# supprimer un élément d'un set + erreur si l'élément n'existe pas
 fruits.remove("coing")
+print(f"maintenant coing dans {fruits}: { "coing" in fruits }")
 
 # supprimer un élément d'un set + ne fait rien
 fruits.discard("ananas")
+print(f"maintenant coing dans {fruits}: { "coing" in fruits }")
 
 # tester si les sets sont itérables
 for f in fruits:
@@ -121,7 +123,12 @@ for f in fruits:
 
 # conversions entre set <-> list
 fruits_list = list(fruits)
-fruits_set = set(fruits_list)
+
+fruits_list.append("pomme")
+print(f"liste de fruits: {fruits_list}")
+
+fruits = set(fruits_list)
+print(f"set de fruits: {fruits}")
 ### les sets dédoublonne naturellement les liste / tuples
 
 # %%

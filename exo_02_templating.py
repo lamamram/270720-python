@@ -25,7 +25,7 @@ injections = {
 
 # %%
 ## 1/ chercher une structure évidente pour une bloucle for
-##  1a/ itération sur le dico mais que faire des slots non remplacés
+##  1a/ itération sur le dico mais que faire des slots non remplacés ?
 ## 2/ si on selectionne le while
 ##  2a/ faire un remplacement sans boucle
 ##  2b/ observer qui a changé ==> indice d'une condition while
