@@ -97,10 +97,11 @@ civilite_nom_complet = "Mr. Joe DOE"
 
 # créer la liste mots, des mots de civilite_nom_complet => split
 mots = civilite_nom_complet.split()
+print(f"liste de mots: {mots}")
 # recréer civilite_nom_complet à partir de mots
 # une valeur litérale de type str a des fonctions internes de str
 civilite_nom_complet = " ".join(mots)
-
+print(f"chaine: {civilite_nom_complet}")
 # %% ---------------- fonctions internes exclusives aux listes -----------------
 mots = ["appeler", "un"]
 
