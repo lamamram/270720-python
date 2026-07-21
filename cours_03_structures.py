@@ -43,9 +43,13 @@ message = ""
 
 # si la réponse est 4 => message vaut "bingo"
 # sinon               => message vaut "perdu"
-
+# if reponse == "4":
+#     message = "bingo"
+# else:
+#     message = "perdu"
 
 # version sur une seule phrase
+message = "bingo" if reponse == "4" else "perdu"
 
 print(message)
 
