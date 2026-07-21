@@ -132,3 +132,8 @@ print(f"set de fruits: {fruits}")
 ### les sets dédoublonne naturellement les liste / tuples
 
 # %%
+fruits = ["pomme", "poire", "banane", "poire", "banane"]
+fruits = list(set(fruits))
+fruits
+
+# %%
