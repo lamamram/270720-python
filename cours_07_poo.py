@@ -160,11 +160,15 @@ print(isinstance(d, dict), isinstance(t, Truc))
 # %% ------------------------ exemple client ---------------------------------
 ## ajouter la classe Account dans le module app.bank
 
-## 1.créer une classe client qui contient firstname, name, et date_joint
+## 1.créer une classe client qui contient firstname, name, et date_joint :objet datetime
 ## et 2 méthodes: 
 ##     get_full_name: retourne le prénom capitalisé et le nom en majuscule
 ##     get_date_joint: retourne la date dans le format voulu en paramètre
 
+from app.bank import Client
+
+cl = Client("john", "doe", "2016-07-22")
+print(cl.date_joint.strftime("%d/%m/%Y"))
 
 
 # %% -------------------------- héritage simple -----------------------------
