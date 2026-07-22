@@ -16,8 +16,17 @@ def init_account(account: dict, balance: float, overdraft: float) -> dict:
   return real_account
 
 # créer une fonction withdraw pour effectuer un retrait d'un montant sur un compte en param.
-def withdraw(account: dict, amount: float):
-  pass
+def withdraw(account: dict, amount: float) -> dict:
+  """
+  fonction de retrait sur un dictionnaire...
+  """
+  if amount < 0:
+    print(f"Transaction refusée: {amount} négatif")
+  elif amount > account["balance"] + account["overdraft"]:
+    print(f"Transaction refusée: {amount} fonds insuffisants")
+  else:
+    account["balance"] -= amount
+    return account
 
 
 # %% -- utilisation simple ---------------
@@ -29,6 +38,7 @@ if __name__ == "__main__":
 
   amount = float(input("amount: "))
   withdraw(real_account, amount)
+  print(real_account)
 
   
 
