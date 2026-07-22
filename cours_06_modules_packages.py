@@ -47,21 +47,41 @@ print(account)
 # %% --- exemples d'utilisation de modules de la bibliothèque standard ------
 ## exemple de datetime
 ## importer l'objet datetime à partir du module datetime
+from datetime import datetime, timedelta
 
 # créer une variable dt représente la date d'aujourd'hui avec la signature de base 
+dt = datetime(2026, 7, 22, 14, 29)
+print(dt, type(dt))
 
 # idem avec une fonction interne
+dt = datetime.now()
+print(dt)
 
-# idem  Parser un dt à partir de la str "2026-04-01 15:30" et le format "%Y-%m-%d %H:%M" 
+# idem  Parser un dt à partir de la str "2026-07-22 14:33" et le format "%Y-%m-%d %H:%M" 
+dt = datetime.strptime("2026-07-22 14:33", "%Y-%m-%d %H:%M")
+print(dt)
+
+# annee, mois, jour, ...
+print(dt.year, dt.month, dt.weekday())
 
 # à partir de la variable dt, Formater "%d/%m/%Y"
+print(dt.strftime("%d/%m/%Y"))
 
-# à partir de la variable dt, afficher le nb de secondes à partir le 1er janvier 1970
+# à partir de la variable dt, afficher le nb de secondes à partir du 1er janvier 1970
+print(dt.timestamp())
 
-# afficher la durée entre la fin de la journée et maintenant, en heures, min, s
+# afficher la durée entre la fin de la journée et maintenant, en heures, min
+auj_1710 = datetime(2026, 7, 22, 17, 10)
+remain = auj_1710 - datetime.now()
+print(remain, type(remain))
+s = remain.seconds
+print(f"reste: {s // 3600}h, {s % 3600 // 60}m, {s % 60}s")
+
 
 # date + duree (timedelta) = date
-
+cuisson_oeuf_coque = timedelta(minutes=3)
+atable = datetime.now() + cuisson_oeuf_coque
+print(atable)
 
 
 # %% ------------- import d'un module d'un package ------------------------
