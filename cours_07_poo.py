@@ -1,7 +1,7 @@
 # %% un exemple en programmation impérative / procédurale 
 ## sans programmation orientée objet
 
-# ce dictionnaire représente la strucutre générique d'un compte
+# ce dictionnaire représente la structure générique d'un compte
 account = {
   "balance": 0,
   "overdraft": 0,
@@ -55,14 +55,16 @@ if __name__ == "__main__":
   amount = int(amount)
 
   withdraw(real_account, amount)
+  print(real_account)
+  print(account)
 
 # %% --- même exemple en Programmation Orientée Objet (POO) avec attributs de classes et sans __init__ ---------
 
 class Account:
 
   # attributs (ici de classe) => VARIABLES INTERNES
-  balance = 0.
-  overdraft = 0.
+  balance: float = 0.
+  overdraft: float = 0.
   
   # méthodes => FONCTIONS INTERNES
   def withdraw(account, amount: float):
@@ -83,6 +85,7 @@ if __name__ == "__main__":
   ## le premier de toute méthode est un objet de cette classe
   ## ici cet objet est acc !! donc on a pas besoin de le redemander quand on appelle la méthode
   acc.withdraw(500)
+  print(acc.balance)
 
 # %% --- même exemple en Programmation Orientée Objet (POO) avec __init__ ---------
 
@@ -90,6 +93,9 @@ class Account:
   """
   le premier paramètre de toute méthode est nommé par convention self
   """
+
+  __balance: float = 0
+  overdraft: float = 0
 
   def __init__(self, balance: float, overdraft: float=200) -> dict:
     """
@@ -111,10 +117,19 @@ class Account:
       self.__balance -= amount
       print(f"Transaction acceptée: nouveau solde {self.__balance}")
 
-
+  def get_balance(self):
+    return self.__balance
+  
 if __name__ == "__main__":
-  acc = Account(1000)
+  acc = Account(balance=1000)
   acc.withdraw(500)
+  print(acc.overdraft)
+  print(acc.get_balance())
+  # print(Account.overdraft)
+  ## __balance: est considéré comme privé
+  ## on ne peut pas le lire ou le modifier depuis l'EXTERIEUR de la classe
+  # print(acc.__balance) # AttributeError
+
   # print(acc._Account__balance) => moyen détourné d'utiliser un attribuer privé depuis l'extérieur
   # print(acc.__balance)
 
