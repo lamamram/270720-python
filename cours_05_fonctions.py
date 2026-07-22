@@ -100,7 +100,7 @@ print("x: global après réaffectation", x, id(x)) # x global prend l'id du x lo
 
 
 # %% --------------- passage en référence de type mutables ------------------
-def mutable(l: list, elem: int):
+def mutable(l: list, elem: int) -> None:
       print("l: param", l, id(l))
       l.append(elem)
       print("l: param après chgt", l, id(l))
@@ -110,6 +110,17 @@ print("l global avant exec mutable()", l, id(l))
 mutable(l, 4)
 print("l global après exec mutable()",l, id(l)) # l global a changé car l est mutable => le l local
 
+# %% ------------------- utilisation d'une variable globale dans une fonction -------------------
+
+def immutable() -> None:
+      """procédure qui modifie la variable globale x"""
+      global x
+      x += 1
+
+x = 5
+print("x: global avant appel", x, id(x))
+immutable()
+print("x: global après appel", x, id(x)) # x global a été modifié par la fonction
 
 
 # %% --------------- types de paramètres ----------------------------------
