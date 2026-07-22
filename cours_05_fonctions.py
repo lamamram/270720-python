@@ -2,7 +2,7 @@
 ## une fonction est un objet créé/définie avec: 
 ## le mot clé def suivi de <nom_de_la_fonction>(): 
 ##     et après un bloc d'instructions  
-
+# f = function(){print("coucou")} en JS
 # définition d'une fonction ma_fonction() qui contient l'affichage de "coucou"
 def ma_fonction():
     print("coucou")
@@ -31,14 +31,23 @@ ret = ma_fonction()
 # %% -- définition d'une fonction avec des paramètres et appel des paramètres ---
 # définir une fonction qui ajoute 2 entiers en paramètres et qui retourne la somme 
 # a, b dans la définition de la focntions sont des paramètres formels
-
+def addition(a, b):
+    return a + b
 
 ## injection des variables préexistante à la fonction (globales) en tant que paramètres d'appel: 
 ## passage en référence
 
 # -------------------------------------------  a   b    a    b      a     b       a  b
 # appliquer cette fonction avec des paramètres (3, 4), (3.5, 4.5), ("xx", "yy"), (2, "yy")  
+print("addition(3, 4) => ", addition(3, 4))
+print("addition(3.5, 4.5) => ", addition(3.5, 4.5))
+print("addition('xx', 'yy') => ", addition("xx", "yy"))
+# print("addition(2, 'yy') => ", addition(2, "yy")) # TypeError: unsupported operand type(s) for +: 'int' and '
 
+x, y = 3, 4
+print("addition(x, y) => ", addition(x, y)) # injection de variables global
+a, b = 3.5, 4.5
+print("addition(a, b) => ", addition(a, b)) # injection de variables global même nom que les paramètres formels: pourquoi pas ?
 
 # %% ------------ annotations, documentation et contrôle -------------------
 ## créer une fonction division de 2 floats qui retourne un float
@@ -46,7 +55,19 @@ ret = ma_fonction()
 ## REM: les annotations ne sont pas des contrôles, ce ne sont que des indications
 ## 2. documenter la fonction en ajoutant une """doctstring""" au début du bloc
 ## 3. faire un contrôle sur le dénominateur
+def division(a: float, b: float) -> float | str:
+    """ retourne le résultat de la division de a par b
+    a: float, le numérateur
+    b: float, le dénominateur
+    return: float, le résultat de la division
+    """
+    if b == 0:
+        return "division par zéro impossible"
+    return a / b
 
+num = 3
+denom = float(input("entrez le dénominateur: "))
+print("division(num, denom) => ", division(num, denom))
 
 
 # %% ------------------ portée globale et locale ------------
