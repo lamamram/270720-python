@@ -1,4 +1,9 @@
-def withdraw(account: dict, amount: float) -> float:
+PI = 3.14159
+
+def withdraw(account: dict, amount: float) -> dict:
+  """
+  fonction de retrait sur un dictionnaire...
+  """
   if amount < 0:
     print(f"Transaction refusée: {amount} négatif")
   elif amount > account["balance"] + account["overdraft"]:

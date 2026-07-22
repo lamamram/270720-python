@@ -9,13 +9,25 @@
 
 # 2. importer le module est exécuter la fonction dans le module principal
 import bank
-# bank est une variable de type module qu'on appelle espace de nom du module
 
+account = {"balance": 2000, "overdraft": 200}
+amount = 100
+# bank est une variable de type module qu'on appelle espace de nom du module
+account = bank.withdraw(account, amount)
+print(account)
+print(bank.PI)
 
 
 # %% -- à partir d'un module, importer une fonction => sans espace de nom ----
 ## idem sans espace de nom
-from bank import withdraw
+# from bank import withdraw, PI
+from bank import *
+
+account = {"balance": 2000, "overdraft": 200}
+amount = 100
+account = withdraw(account, amount)
+print(account)
+print(PI)
 
 
 
@@ -23,7 +35,12 @@ from bank import withdraw
 # idem en changeant le nom de la fonction à l'import
 from bank import withdraw as retrait
 
+# conflit de nom
 withdraw = "qqch d'autre"
+account = {"balance": 2000, "overdraft": 200}
+amount = 100
+account = retrait(account, amount)
+print(account)
 
 
 
