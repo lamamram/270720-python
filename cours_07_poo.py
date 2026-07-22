@@ -152,9 +152,9 @@ t = Truc()
 print(d, t)
 
 # afficher le type de t et de d
-
+print(type(d), type(t))
 # vérifier que t est d'instance de Truc  et d instance de dict avec isinstance()
-
+print(isinstance(d, dict), isinstance(t, Truc))
 
 
 # %% ------------------------ exemple client ---------------------------------
