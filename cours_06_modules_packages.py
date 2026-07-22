@@ -90,12 +90,17 @@ print(atable)
 ## un package est un dossier qui contient un ou des modules ou des sous packahes 
 ## et qui contient un fichier nommé __init__.py qui peut être vide
 import app.utils
+app.utils.parse_template("Hello {{name}}!", {"name": "Alice"}, debug=True)
 
 # raccourcir le chemin d'importation avec un alias
+import app.utils as tool
 
+tool.parse_template("Hello {{name}}!", {"name": "Alice"}, debug=True)
 
 # à partir du module utils dans le package app, importer la fonction
+from app.utils import parse_template
 
+parse_template("Hello {{name}}!", {"name": "Alice"}, debug=True)
 
 
 
@@ -103,18 +108,20 @@ import app.utils
 import bank
 
 print(f"Nom du module importé: {bank.__name__}")
-print(f"Nom du module importé: {__name__}")
+print(f"Nom du module principal: {__name__}")
 # le nom du module courant sera toujours __main__
-# le nom d'un module importé sera toujouts le nom du fichier - l'extension
+# le nom d'un module importé sera toujours le nom du fichier - l'extension
 
 # 1. afficher le nom du programme principal: nom du module courant
 # 2. afficher le nom d'un module importé
 # 3. comment certifier qu'un code d'un module donné ne s'exécutera que si le module est principal
-# cf => dans tools.py
+# cf => dans bank.py
 
 # ici c'est une convention qui fait référence au int main(void){} en C
 if __name__ == "__main__":
-  bank.withdraw({"balance": 1000, "overdraft": 200}, 500)
+  print(bank.withdraw({"balance": 1000, "overdraft": 200}, 500))
 
 
 
+
+# %%
