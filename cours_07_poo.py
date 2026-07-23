@@ -165,12 +165,15 @@ print(isinstance(d, dict), isinstance(t, Truc))
 ##     get_full_name: retourne le prénom capitalisé et le nom en majuscule
 ##     get_date_joint: retourne la date dans le format voulu en paramètre
 
-from app.bank import Client
+from app.bank import Client, Account
 
 cl = Client("john", "doe", "2016-07-22")
 # print(cl.date_joint.strftime("%d/%m/%Y"))
 print(cl.get_full_name())
 print(cl.get_date_joint("%d/%m/%Y"))
+
+acc = Account(cl, 2000)
+print(acc.get_client_full_name())
 
 
 # %% -------------------------- héritage simple -----------------------------

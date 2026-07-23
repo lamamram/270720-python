@@ -60,4 +60,4 @@ class Account:
     return self.__balance
 
   def get_client_full_name(self):
-    return self.get_client_full_name()
+    return self.client.get_full_name()
