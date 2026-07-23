@@ -168,7 +168,9 @@ print(isinstance(d, dict), isinstance(t, Truc))
 from app.bank import Client
 
 cl = Client("john", "doe", "2016-07-22")
-print(cl.date_joint.strftime("%d/%m/%Y"))
+# print(cl.date_joint.strftime("%d/%m/%Y"))
+print(cl.get_full_name())
+print(cl.get_date_joint("%d/%m/%Y"))
 
 
 # %% -------------------------- héritage simple -----------------------------

@@ -130,6 +130,14 @@ print("x: global après appel", x, id(x)) # x global a été modifié par la fon
 ## 2. le prix est arbitraire => paramètre positionnel / obligatoire
 ## MAIS on considère que la valeur par défaut du taux est 20 => paramètre nommé / optionnel
 
+def calcul_tva(prix_ht: float, taux: float = 20) -> float:
+    """ retourne la valeur de la tva sur le prix ht et le taux
+    prix_ht: float, le prix hors taxe
+    taux: float, le taux de tva (par défaut 20)
+    return: float, la valeur de la tva
+    """
+    return prix_ht * taux / 100
+
 # ---param: positionnel / obligatoire,  nommé / optionnel
 
 
@@ -138,11 +146,11 @@ print("x: global après appel", x, id(x)) # x global a été modifié par la fon
 ## print(f"""appel positionnel: rien -> prix_ht, rien -> taux 
 ##        => {calcul_tva()} """) # TypeError
 print(f"""appel positionnel: 199 -> prix_ht, 5.5 -> taux 
-       => {"???"} """)
+       => {calcul_tva(199, 5.5)} """)
 print(f"""appel avec un paramètre optionnel: 199 -> prix ht et rien -> taux
-       => {"???"} """)
+       => {calcul_tva(199)} """)
 print(f"""appel nommé: les valeurs sont fléchées vers les paramètres 
-       => pas besoin d'ordre => {"???"} """)
+       => pas besoin d'ordre => {calcul_tva(taux=5.5, prix_ht=199)} """)
 
 
 
@@ -154,11 +162,13 @@ print(f"""appel nommé: les valeurs sont fléchées vers les paramètres
 ## on veut afficher tous les mots soudés par "-" à partir de 2 prints
 ## et les 2 paramètres nommées "sep" et "end"
 
-print("bonjour", "tout", "le", "monde")
-print("comment", "allez", "vous")
+print("bonjour", "tout", "le", "monde", sep="-", end="-")
+print("comment", "allez", "vous", sep="-")
 
 
 ## créer une fonction addition qui peut ajouter un nombre quelconque de params
+def addition(*args):
+    return sum(args)
 
 
 
@@ -168,6 +178,7 @@ def ma_fonction(a, b, c):
 
 l = [1, 2, 3]
 ## injecter les éléments de la liste l en tant que paramètres d'appel de ma_fonction
+print(ma_fonction(*l))
 
 
 
@@ -180,6 +191,22 @@ l = [1, 2, 3]
 # 2. et un nombre quelconque de paramètres nommés/optionnels
 # 3. pour créer et retourner un dictionnaire user 
 #    avec les paramètres obligatoires et les autres s'ils existent (age, taille...)
+def create_user(firstname: str, name: str, **options) -> dict:
+    """ retourne un dictionnaire user avec les paramètres obligatoires et les autres s'ils existent (age, taille...)
+    firstname: str, le prénom
+    name: str, le nom
+    kwargs: dict, les paramètres nommés/optionnels
+    return: dict, le dictionnaire user
+    """
+    user = {"firstname": firstname, "name": name}
+    # for k, v in options.items():
+    #     user[k] = v
+    # même chose que le for mais attention aux doublons de clés dans options => on écrase la valeur précédente
+    user.update(options)
+    return user
+
+print(create_user("John", "Doe"))
+print(create_user("John", "Doe", age=30, taille=1.80))
 
 # ---------------- positionnels, clé/valeur dans le dict options
 

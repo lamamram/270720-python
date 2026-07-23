@@ -1,15 +1,31 @@
 from datetime import datetime
 
-class Client:
+
+class Person:
+  def __init__(self, firstname: str, name: str):
+    self.firstname = firstname
+    self.name = name
+
+  ## dans l'héritage: comportement hérité client peut utiliser çà
+  def get_full_name(self):
+      return f"{self.firstname.capitalize()} {self.name.upper()}"
+
+
+class Client(Person):
+  ## dans l'héritage: une surcharge (override) on doit utiliser le __init__ de person MAIS avec l'objet client
+  ## et on complète le __init__ de client avec ses propres attributs
   def __init__(
       self, 
       firstname: str, 
       name: str, date_joint: str, 
       format: str="%Y-%m-%d"
   ):
-    self.firstname = firstname
-    self.name = name
+    super().__init__(firstname, name)
     self.date_joint: datetime = datetime.strptime(date_joint, format)
+
+  ## dans l'héritage: comportement spécifique au client
+  def get_date_joint(self, format: str="%Y-%m-%d"):
+    return self.date_joint.strftime(format)
 
 
 
