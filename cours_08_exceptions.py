@@ -11,6 +11,11 @@ def division(a: float, b: float) -> float:
 ##      s'il n'ya pas d'erreur le bloc try s'exécute jusq'au bout
 ## ET l'entête except
 ##       s'il y a erreur, le bloc try s'interromp et exécute le bloc except
+try:
+    a, b = 5, 0
+    ret = division(a, b)
+except:
+    print("pb")
 
 
 
@@ -29,6 +34,30 @@ def division(a: float, b: float) -> float:
 ## except <classe> as e: //
 ##                       et injecte un objet exception e dans le bloc
 
+try:
+    # a, b = 5, 10
+    a, b = 5, 0
+    d = {"k": 1}
+    d["j"]
+    # a, b = 5, "truc"
+    ret = division(a, b)
+## traitements individuels d'erreurs particulières
+# except ZeroDivisionError as e:
+#     print(e)
+# except TypeError as e:
+#     print(e)
+
+## traitement collectif de certaines erreurs particulières
+except (ZeroDivisionError, TypeError) as e:
+     print(e)
+# except Exception as e: # capture tout
+#     print(e)
+
+## ce bloc ne sera exécuté que s'il n'ya aucune exception déclenchée de le try
+else:
+     print(f"résultat final: {ret * 25/100}")
+finally:
+     print("on aura toujours ce message même en cas de plantage")
 
 
 ## TIP: quand on veut protéger un code donnée
@@ -39,10 +68,12 @@ def division(a: float, b: float) -> float:
 
 
 # %% ------------------ else, finally ------------------------------------
-    
-    
+
+
+
 
 # %% --- lever une exception nous même quand on a un pb "métier" ---------
+
 ## 1. créer une liste de  notes de 0 -> 20 avec deux valeurs aberrantes -4 et 22
 ## 2. créer la fonction average qui calcule la moyenne
 ##    et calculer la moyenne de la liste de notes
@@ -50,7 +81,20 @@ def division(a: float, b: float) -> float:
 ##    tip: trouver une erreur native de python de type XxxxxError
 ## 4. protéger le calcul de la moyenne des notes
 
+notes = [12, 15, 18, 20, 10, -4, 22]
 
+def average(notes: list) -> float:
+    """cette fonction retourne la moyenne des notes"""
+    for note in notes:
+        # if note < 0 or note > 20:
+        if not (0 <= note <= 20):
+            raise ValueError(f"note aberrante: {note}")
+    return sum(notes) / len(notes)
+
+try:
+    ret = average(notes)
+except ValueError as e:
+    print(e)
 
 
 
