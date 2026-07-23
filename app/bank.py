@@ -35,7 +35,7 @@ class Account:
   le premier paramètre de toute méthode est nommé par convention self
   """
 
-  def __init__(self, balance: float, overdraft: float=200) -> dict:
+  def __init__(self, client: Client, balance: float, overdraft: float=200) -> dict:
     """
     __init__: méthode "magique" qui a pour but d'initialiser les attributs d'objets
     """
@@ -43,6 +43,7 @@ class Account:
     # permet de protéger l'utilisation des attributs: 
     # seules les méthodes publiques peuvent les manipuler
     # les méthodes publiques sont un "sas" d'entrée / sortie avec l'extérieur
+    self.client = client
     self.__balance = balance
     self.overdraft = overdraft
   
@@ -57,3 +58,6 @@ class Account:
 
   def get_balance(self):
     return self.__balance
+
+  def get_client_full_name(self):
+    return self.get_client_full_name()
