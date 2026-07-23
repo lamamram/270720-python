@@ -108,7 +108,7 @@ n = 2
 # %% ---------------------- gérer des entêtes --------------------
 lines = []
 
-with open("./fichier.txt", mode="w", encoding="utf-8") as f:
+with open("./mon_fic.txt", mode="w", encoding="utf-8") as f:
     f.writelines([
         "name;age;size\n",
         "bob;33;1.75\n"
@@ -117,10 +117,26 @@ with open("./fichier.txt", mode="w", encoding="utf-8") as f:
 ## utiliser la fonction next() pour faire une itération indivuelle des lignes de fihier
 ## pour récupérer la première ligne du fichier
 
+# with open("./mon_fic.txt", mode="r", encoding="utf-8") as f:
+#     for i, line in enumerate(f, start=1):
+#       if i != 1:
+#         print(line)
+
+# with open("./mon_fic.txt", mode="r", encoding="utf-8") as f:
+#     f.readline()
+#     for line in f:
+#        print(line)
+
+with open("./mon_fic.txt", mode="r", encoding="utf-8") as f:
+    header = next(f) # itération pas à pas
+    print(header)
+    for line in f:
+       print(line)
 
 
 # %% -----------------  création d'un csv -----------------------------
 ## importer le module standard csv de la bibliothèque standard
+import csv
 
 ## données à écrire dans le csv: une liste de dictionnaires
 users = [
@@ -129,19 +145,39 @@ users = [
 ]
 
 # 1. fabriquer le header
+header = list(users[0])
+print(header)
 
 # 2. fabriquer les données: liste de listes à partir des valeurs des dictionnaires
-
+data = list(map(lambda u: list(u.values()), users))
+print(data)
 
 # 3. ouvrir le fichier users.csv en création en utf-8 
 # et utiliser un writer du module csv 
 # pour écrire des ilgnes de csv avec le séparateur ";"
-
+with open("./users.csv", mode="w", encoding="utf-8") as f:
+    ## en windows, forcer le saut de ligne avec \n
+    writer = csv.writer(f, delimiter=";", lineterminator="\n")
+    writer.writerow(header)
+    writer.writerows(data)
 
 
 ## REM avec windows la fin ligne est \r\n ...
 # %% ------------------ idem mais avec le bon outil ------------------------------
+import csv
 
+users = [
+  {"firstname":"Joe", "lastname": "Doe", "age": 22, "height": 1.75, "comment": "blablab ... ; blabliblo"},
+  {"firstname": "Jane", "lastname": "Austen", "age": 34, "height": 1.79, "comment": "blabla"},
+]
+
+with open("./users.csv", mode="w", encoding="utf-8") as f:
+    dw = csv.DictWriter(
+        f, fieldnames=list(users[0]), 
+        delimiter=";", lineterminator="\n"
+    )
+    dw.writeheader()
+    dw.writerows(users)
 
 
 # %% --------------- lire les lignes de csv ---------------
