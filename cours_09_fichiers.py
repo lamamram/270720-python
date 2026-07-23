@@ -4,57 +4,77 @@
 ## "~" : dossier utilisateur
 ## mode "w" : création si le fichier existe ET écrasement du contenu s'il existe
 ## attention souvent sous windows/Excell on peut avoir des fichiers encodés en iso-8859-1
-
+f = open("./mon_fic.txt", mode="w", encoding="utf-8")
 # creér (OUVRIR en mode création) le fichier "mon_fichier.txt" en encodage utf-8
-
+f.write("1ère ligne\n")
+f.write("2ème ligne\n")
 # écriture de deux lignes avec les sauts de lignes
 
 # important! il faut fermer ce qu'on a ouvert
-
+f.close()
 
 
 # %% ----------------- lire le contenu d'un fichier ---------------------
 ## ouvrir le fichier en lecture et même encodage
-
+f = open("./mon_fic.txt", mode="r", encoding="utf-8")
 # lire une ligne (avec \n)
+print(f.read(11))
 
 # lire tout
+print(f.read())
 
 ## REM. notion de curseur: la deuxième lecture reprend 
 ## depuis la fin de la première ligne
-
+f.close()
 
 
 # %% ------------- écriture à la fin du fichier (append) -------------------
 # écrire une 3ème ligne dans le fichier 
-
+f = open("./mon_fic.txt", mode="a", encoding="utf-8")
 # vérifier que le contenu existant n'a pas été supprimé
+f.write("3ème ligne\n")
 
-
+f.close()
 
 # %% --------------------- readlines / writlelines --------------
+f = open("./mon_fic.txt", mode="r", encoding="utf-8")
+print(f.readlines())
+f.close()
 
+f = open("./mon_fic.txt", mode="w", encoding="utf-8")
+f.writelines([
+    "1ère ligne\n",
+    "2ème ligne\n",
+    "3ème ligne\n"
+])
+f.close()
 
 # %% ------------------- modes avancés ------------------------------
 # remplacer la ligne n
 # r+: on a le curseur au début en lecture
 #   : on peut replacer le curseur
-f = open("./fichier.txt", mode="r+", encoding="utf-8")
+f = open("./mon_fic.txt", mode="r+", encoding="utf-8")
+
 # ce read est pour positionner le curseur à la fin
-f.read()
-f.write("4ème ligne\n")
+# print(f.read())
+# f.write("4ème ligne\n")
 # je remets le curseur au début
-f.seek(0)
-print(f.read())
+# f.seek(0)
+# print(f.read())
 
 ### ATTENTION - seek se positionne sur un numéro d'OCTET, pas de numéro de CARACTERE
 # avec utf-8 les caractère ASCII (de base) comme (a, 1, !, ?, ...) sont encodé sur 1 seul octet
 # MAIS les caractères non ASCII comme (é, è, diacritique, idéogrammes ...) sont encodé avec 2 ou plus d'octet
 f.seek(2)
-# f.read()
+f.read()
 f.close()
 
 # %% -- faciliter les ouvertures/fermetures: gestionnaires de contexte: with --
+
+with open("./mon_fic.txt", mode="r", encoding="utf-8") as f:
+    print(f.read())
+
+f.read()
 
 ## with <ouverture>() as <var>:
   # fichier ouvert
@@ -68,6 +88,10 @@ f.close()
 
 # %% ----------- un fichier est un itérable de lignes ----------------------
 
+with open("./mon_fic.txt", mode="r", encoding="utf-8") as f:
+    # for line in f:
+    #     print(line)
+    print(list(f))
 
 
 # %% --------- suppression de la ligne n avec for ----------
