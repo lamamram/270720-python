@@ -204,8 +204,6 @@ print(acc.get_client_full_name())
 ## un compte possède un client et un client peut posséder plusieurs comptes
 ## on peut voir le nom complet du client depuis le compte
 
-# %% ------------------------- héritage multiple + polymorphisme --------------------
-
 
 # %% ------------------------ méthodes magiques ------------------------
 ## autres méthodes dunders (magique __xxxx__) utilisation de __str__, __add__
@@ -221,11 +219,137 @@ print(acc == acc2)
 
 
 
-# %% -------------- itérateur / itérable ---------------
+# %% ------------------------- héritage multiple + polymorphisme --------------------
+# classe abstraite = impossible d'instancier
+# abstractmethod est un décorateur qui rend une méthode abstraite
+from abc import ABC, abstractmethod
 
+# "Interface" en python
+# une interface garanti un ensemble de méthodes 
+# (des noms des paramètres d'i/o) liés à un SAVOIR FAIRE
+class IAccount(ABC):
+  @abstractmethod
+  def __init__(self, balance: float) -> None: pass
+
+  @abstractmethod
+  def get_balance(self) -> float: pass
+
+
+class BasicAccount(IAccount):
+  def __init__(self, balance: float, overdraft: float):
+    self.balance = balance
+    self.overdraft = overdraft
+  
+  def withdraw(self, amount: float):
+    if amount <= self.balance + self.overdraft: self.balance -= amount
+  
+  def get_balance(self):
+    return self.balance
+
+class SavingAccount(IAccount):
+  def __init__(self, balance: float, rate: float):
+    self.balance = balance
+    self.rate = rate
+  
+  def interest(self):
+    self.balance += self.balance*self.rate/100
+
+class PremiumAccount(BasicAccount, SavingAccount):
+  def __init__(self, balance: float, overdraft: float, rate: float):
+    # indétermination: quel __init__ est utilisé ? en réalité il ya un algo MRO: ordre de résolution de méthodes
+    # super().__init__(balance, overdraft)
+    # plus simple
+    BasicAccount.__init__(self, balance, overdraft)
+    SavingAccount.__init__(self, balance, rate)
+
+  def get_balance(self):
+    # ici super ira chercher de BasicAccount
+    return super().get_balance()
+
+class Manager:
+  ## POLYMORPHISE == demander un objet de type IAccount 
+  # ==> j'utilise n'importe quel objet qui implémente toutes les signatures de IAccount
+  def __init__(self, account: IAccount):
+    self.__account = account
+    print(self.__account.get_balance())
+
+if __name__ == "__main__":
+  p_acc = PremiumAccount(1000, 200, 2.5)
+  print(p_acc.get_balance(), p_acc.overdraft, p_acc.rate)
+  p_acc.withdraw(500)
+  p_acc.interest()
+  print(f"nouveau solde: {p_acc.get_balance()}")
+   
+  print(PremiumAccount.mro()) # ordre simple des résolution des méthodes
+
+
+
+# %% -------------- itérateur / itérable ---------------
+# un itérateur/itérable : une classe qui implémente les 3 méthodes 
+# __init__, __iter__, __next__
+class MyRange: pass
+class MyRange:
+
+  def __init__(self, limit=10):
+    """ init pour la condition d'arrêt """
+    self.limit = limit
+  
+  def __iter__(self) -> MyRange:
+    """ un itérateur == itérable avec un compteur """
+    self.cpt = 0
+    return self
+  
+  def __next__(self):
+    if self.cpt < self.limit:
+      ret = self.cpt
+      self.cpt += 1
+      return ret
+    else:
+      raise StopIteration
+
+# mr est un itérable
+mr = MyRange()
+
+# iter exécute mr.__iter__() pour faire d'it un itérateur
+it = iter(mr)
+
+print("-"*10 + "pas à pas avec next" + "-"*10)
+
+for _ in range(10):
+  print(next(it))
+
+# recharge l'itérateur
+it = iter(mr)
+print(next(it)) # => l'itération de TROP sauf si le compteur est rechargé
+
+print("-"*10 + "boucle for" + "-"*10)
+
+# 1. recharge / créé le compteur
+# enchaine les next
+# et CAPTURE l'exception StopIteration
+for i in it:
+  print(i)
 
 
 # %% ------------------------- gestionnaire de contexte --------------------
+class Ctx:
+  def __enter__(self):
+    print("Before")
+    # donne une valeur à la variable "as xxx"
+    return self
+  
+  def __exit__(self, x_type, x_msg, x_tb):
+    # exit: peut capturer une exception déclenchée dans le bloc
+    print(x_type, x_msg)
+    print("After")
+    # en retournant qqch vrai: __exit__ capture réellement l'exception
+    return True
 
+with Ctx() as c:
+  print(f"variable de contexte: {c}")
+  3 / 0
+  print("dans le bloc")
+
+print("fin")
 
 # %%
