@@ -82,8 +82,15 @@ if not os.path.exists(f"./{archive_name}"):
 
 
 # %%  ---------------------- decompression -----------------------------
+from zipfile import ZipFile
 
+if not os.path.exists(f"./data/{DNS_NAME}"):
+   with ZipFile(f"./{archive_name}", mode="r") as zf:
+      to_extract = zf.namelist()[0]
+      zf.extract(to_extract)
 
+   os.mkdir("./data")
+   os.rename(f"./{to_extract}", f"./data/{DNS_NAME}")
 
 # %% ----------------  manipulation du fichier ---------------------
 
