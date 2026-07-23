@@ -223,17 +223,22 @@ print(ma_fonction(**dico))
 
 
 # %% ----------------- programmation fonctionnelle et lambda: exemple map ---------------------
-def to_upper(s: str):
-    return s.upper()
+# def to_upper(s: str):
+#     return s.upper()
 
 fruits = ["pomme", "poire", "framboise"]
 
 ## j'injecte en premier paramètre l'objet fonction to_upper 
 ## NON PAS la valeur de retour to_upper(...)
 
+# list(map(to_upper, fruits))
+list(map(str.upper, fruits))
 ## on a pas besoin de to_upper car on peut utiliser l'objet méthode de la classe str
 
 ## on peut aussi utiliser une fonction lambda,  lambda <variables,>: <expression>
+list(map(lambda f: f.upper(), fruits))
+
+# mauvaise pratique :(lambda f: f.upper())("pomme")
 
 ## REM programmation fonctionnelle et + performante que les boucles for pour transformer une liste
 
@@ -244,7 +249,7 @@ fruits = ["pomme", "poire", "framboise"]
 # fruits qui commencent par "p"
 
 ## filtrer la liste selon la valeur True d'une fonction en paramètre
-
+list(filter(lambda f: f.startswith("p"), fruits))
 
 
 # %% ----------------- programmation fonctionnelle et lambda: exemple sorted -------------
@@ -257,4 +262,8 @@ random.shuffle(rows)
 print(rows)
 
 ## trier en python: sorted()
+# sorted(rows)
 ## le paramètre key permet de trier selon la valeur de retour d'une fonction
+sorted(rows, key=lambda r: int(r[r.index("_") + 1:]))
+sorted(rows, key=lambda r: int(r.split("_")[1]))
+# %%
