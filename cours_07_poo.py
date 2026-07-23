@@ -209,6 +209,17 @@ print(acc.get_client_full_name())
 
 # %% ------------------------ méthodes magiques ------------------------
 ## autres méthodes dunders (magique __xxxx__) utilisation de __str__, __add__
+from app.bank import Account, Client
+
+cl = Client("john", "doe", "2016-07-22")
+acc = Account(cl, 2000)
+acc2 = Account(cl, 1000)
+
+print(acc)
+
+print(acc == acc2)
+
+
 
 # %% -------------- itérateur / itérable ---------------
 

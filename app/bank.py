@@ -47,6 +47,18 @@ class Account:
     self.__balance = balance
     self.overdraft = overdraft
   
+  def __str__(self):
+    """
+    méthode magagique (dunder): permet la conversion des objets account en str
+    """
+    return f"Account de {self.client.get_full_name()} avec solde {self.__balance} et découvert autorisé {self.overdraft}"
+
+  def __eq__(self, other):
+    """
+    méthode magagique (dunder): permet la comparaison des objets account
+    """
+    return self.__balance == other.__balance and self.overdraft == other.overdraft
+
   def withdraw(self, amount: float):
     if amount < 0:
       print(f"Transaction refusée: {amount} négatif")
