@@ -183,6 +183,22 @@ with open("./users.csv", mode="w", encoding="utf-8") as f:
 # %% --------------- lire les lignes de csv ---------------
 import csv
 
+with open("./users.csv", mode="r", encoding="utf-8") as f:
+    dr = csv.DictReader(f, delimiter=";")
+    users = list(dr)
+
+# avec simple reader
+with open("./users.csv", mode="r", encoding="utf-8") as f:
+    r = csv.reader(f, delimiter=";")
+    users_list = list(r)
+
+# refaire la liste de dictionnaires à partir d'une liste de liste
+header = users_list[0]
+data = users_list[1:]
+                #  clé  , valeur
+users = [dict(zip(header, row)) for row in data]
+
+
 # idem mais en lecture
 # protéger l'ouverture du fichier s'il le fichier existe
 # tip: on peut itérer de façon manuelle un itérable avec la fonction next()
@@ -203,12 +219,23 @@ users = [
   {"firstname": "Jane", "lastname": "Austen", "age": 34, "height": 1.79, "comment": "blabla"},
 ]
 
+with open("./users.json", mode="w", encoding="utf-8") as f:
+  # json.dump(users, f)
+  # json.dump(users, f, separators=(",",":")) # json reserré
+  json.dump(users, f, indent=4) # json lisible
 
 
 # %% --------------- lire un json ---------------------------
 import json
 # idem en lecture avec json.load ou json.loads
 
+with open("./users.json", mode="r", encoding="utf-8") as f:
+    users = json.load(f)
+
+print(users)
 
 
 
+
+
+# %%
