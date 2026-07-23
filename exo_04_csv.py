@@ -35,6 +35,18 @@ j'ouvre en lecture le gros fichier:
 import requests
 import os
 
+# HTTP: communication client/serveur
+# HTTP: le client envoie une requête HTTP au serveur
+# requête HTTP: (URL, verbe HTTP, entêtes de requêtes, corps (optionnel))
+                     # lire, créer, modifier, supprimer, ...
+         # verbe HTTP: GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS
+         # corps de la requête: données de formulaire, ou pièces jontes, objets json/xml en cas d'api REST
+
+# réponse HTTP: (code de statut, entêtes de réponse, corps de la réponse)
+         # code de statut: 200, 404, 500, ...
+         # corps de la réponse: page HTML, fichier binaire, objet json/xml en cas d'api REST
+#              adresses IP  --------------------path----------------querystring-------------
+# -protocole://nom de domaine/chemin/physique/ou/virtuel/fichier.xxx?param1=val1&param2=val2#ancre
 URL = "https://www.afnic.fr/wp-media/ftp/documentsOpenData/202503_OPENDATA_A-NomsDeDomaineEnPointFr.zip"
 DNS_NAME="dns.csv"
 
