@@ -93,9 +93,37 @@ if not os.path.exists(f"./data/{DNS_NAME}"):
    os.rename(f"./{to_extract}", f"./data/{DNS_NAME}")
 
 # %% ----------------  manipulation du fichier ---------------------
+import csv
 
+nb_slices = 2
+nb_lines = 10**5
 
+def write_slice(i: list, header: list, data: list):
+   with open(f"./data/dns_{i}.csv", mode="w", encoding="utf-8") as wf:
+      wr = csv.writer(wf, delimiter=";", lineterminator="\n")
+      wr.writerow(header)
+      wr.writerows(data)
+      # une liste (muable) en paramètre d'une fonction
+      # à le même id que la variable injectée (rows)
+      # data = [] ==> data devient une variable locale avec un autre id
+      data.clear() # transformation muable
 
+with open(f"./data/{DNS_NAME}", mode="r", encoding="utf-8") as f:
+   rd = csv.reader(f, delimiter=";")
+   rows = []
+   header = next(rd)
+   for i, row in enumerate(rd, start=1):
+      if i > nb_slices * nb_lines:
+         break
+      rows.append(row)
+      if not (i % nb_lines):
+         write_slice(i, header, data=rows)
+         
+   else:
+      # gérer le dernier batch
+      pass
+      
+         
 
 
 
