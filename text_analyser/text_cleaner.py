@@ -10,6 +10,7 @@ class Cleaner:
         self.__text = re.sub(f"[{punctuation}]", " ", self.__text)
       
     def __clean_newlines(self):
+        # raw string: permet de ne pas échapper le \ lui même
         self.__text = re.sub(r"[\r\n]+", " ", self.__text)
     
     def __clean_spaces(self):

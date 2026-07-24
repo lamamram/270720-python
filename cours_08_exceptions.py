@@ -55,9 +55,9 @@ except (ZeroDivisionError, TypeError) as e:
 
 ## ce bloc ne sera exécuté que s'il n'ya aucune exception déclenchée de le try
 else:
-     print(f"résultat final: {ret * 25/100}")
+    print(f"résultat final: {ret * 25/100}")
 finally:
-     print("on aura toujours ce message même en cas de plantage")
+    print("on aura toujours ce message même en cas de plantage")
 
 
 ## TIP: quand on veut protéger un code donnée
@@ -85,10 +85,13 @@ notes = [12, 15, 18, 20, 10, -4, 22]
 
 def average(notes: list) -> float:
     """cette fonction retourne la moyenne des notes"""
+    errors = []
     for note in notes:
         # if note < 0 or note > 20:
         if not (0 <= note <= 20):
-            raise ValueError(f"note aberrante: {note}")
+            errors.append(note)
+    if errors:
+        raise ValueError(f"notes aberrantes: {errors}")
     return sum(notes) / len(notes)
 
 try:

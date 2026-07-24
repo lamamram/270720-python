@@ -22,7 +22,8 @@
 
 # importer une classe d'un module à partir du package
 # en utilisant l'import relatif dans __init__.py
-from text_analyser import Counter
+from text_analyser import Counter, Cleaner
+
 
 if __name__ == "__main__":
   text = """
@@ -44,6 +45,9 @@ Il est conçu pour optimiser la productivité des programmeurs en offrant des ou
 une syntaxe simple à utiliser. 
 """
 
-print(Counter(text).get_occurences())
+cl = Cleaner(text)
+print(Counter(cl).get_occurences())
+
+# print(Counter(text).get_occurences())
 
 # %%
