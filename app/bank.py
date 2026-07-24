@@ -59,6 +59,15 @@ class Account:
     """
     return self.__balance == other.__balance and self.overdraft == other.overdraft
 
+  def __getitem__(self, key):
+    return "acc[key]"
+
+  def __setitem__(self, key, value):
+    return "acc[key] = value"
+
+  def __call__(self, *args, **kwds):
+    return "acc()"
+
   def withdraw(self, amount: float):
     if amount < 0:
       print(f"Transaction refusée: {amount} négatif")
